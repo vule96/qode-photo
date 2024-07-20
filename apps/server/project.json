@@ -1,0 +1,37 @@
+{
+  "name": "server",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/server/src",
+  "projectType": "application",
+  "tags": [],
+  "targets": {
+    "serve": {
+      "executor": "@nx/js:node",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "server:build"
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "server:build:development"
+        },
+        "production": {
+          "buildTarget": "server:build:production"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nx/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/server/**/*.{ts,tsx,js,jsx}"]
+      }
+    },
+    "tsc": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "tsc -p apps/server/tsconfig.json"
+      }
+    }
+  }
+}
